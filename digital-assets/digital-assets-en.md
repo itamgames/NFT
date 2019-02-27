@@ -45,7 +45,6 @@ reason for issuance must be included for the history of digital assets.
 /*
 @param name     to: Digital assets owner
 @param quantity quantity: Number of digital assets to issue
-@param uint64_t token_id: Digital assets ID
 @param string   token_name: Digital assets name
 @param string   category: Category for digital assets to be issued
 @param string   options: Option for digital assets to be issued (Stringified Json)
@@ -59,7 +58,7 @@ options Example
     "luk": 3
 }
 */
-ACTION issue(name to, asset quantity, uint64_t token_id, string token_name, string category, bool fungible, string options, string reason)
+ACTION issue(name to, asset quantity, string token_name, string category, bool fungible, string options, string reason)
 ```
 
 > If the category is unregistered on create, error will occur

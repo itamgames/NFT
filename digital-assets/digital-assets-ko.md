@@ -39,7 +39,6 @@ ACTION create(name issuer, string symbol_name, uint64_t app_id, string structs)
 /*
 @param name     to: 디지털 자산 소유자
 @param quantity quantity: 발행할 디지털 자산 개수
-@param uint64_t token_id: 디지털 자산 아이디
 @param string   token_name: 디지털 자산 이름
 @param string   category: 발행할 디지털 자산의 카테고리
 @param string   options: 발행할 디지털 자산의 옵션 (Stringified Json)
@@ -53,7 +52,7 @@ options Example
     "luk": 3
 }
 */
-ACTION issue(name to, asset quantity, uint64_t token_id, string token_name, string category, bool fungible, string options, string reason)
+ACTION issue(name to, asset quantity, string token_name, string category, bool fungible, string options, string reason)
 ```
 
 > create에 등록된 카테고리가 아닌경우 발행시 에러가 납니다.
