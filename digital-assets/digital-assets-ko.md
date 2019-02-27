@@ -1,4 +1,4 @@
-# ITAM GAMES Digital Assets V 0.1
+# ITAM GAMES Digital Assets V 0.1.1
 
 ## Introducation
 
@@ -189,9 +189,9 @@ TABLE currency
     name issuer;
     asset supply;
     uint64_t app_id;
+    uint64_t sequence;
     vector<category> categories;
 };
-
 
 struct category
 {
@@ -212,7 +212,6 @@ TABLE account
     asset balance;
     map<uint64_t, token> tokens;
 };
-
 
 struct token
 {
