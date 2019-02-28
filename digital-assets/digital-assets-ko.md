@@ -12,10 +12,10 @@
 
 ```c++
 /*
-@param name     issuer: 디지털 자산 발행자
-@param string   symbol_name: 디지털 자산 심볼 이름
-@param uint64_t app_id: 앱 아이디
-@param string   structs: 발행될 디지털 자산의 구조 (Stringified Json)
+@param name          issuer: 디지털 자산 발행자
+@param symbol_code   symbol_name: 디지털 자산 심볼 이름
+@param uint64_t      app_id: 앱 아이디
+@param string        structs: 발행될 디지털 자산의 구조 (Stringified Json)
 structs Example
 [
     {
@@ -24,7 +24,7 @@ structs Example
     }
 ]
 */
-ACTION create(name issuer, string symbol_name, uint64_t app_id, string structs)
+ACTION create(name issuer, symbol_code symbol_name, uint64_t app_id, string structs)
 ```
 
 > 카테고리가 필요한 이유는 잘못 발행되는 디지털 자산을 막기 위한 최소한의 조치 입니다.
@@ -38,7 +38,7 @@ ACTION create(name issuer, string symbol_name, uint64_t app_id, string structs)
 ```c++
 /*
 @param name     to: 디지털 자산 소유자
-@param quantity quantity: 발행할 디지털 자산 개수
+@param asset    quantity: 발행할 디지털 자산 개수
 @param string   token_name: 디지털 자산 이름
 @param string   category: 발행할 디지털 자산의 카테고리
 @param string   options: 발행할 디지털 자산의 옵션 (Stringified Json)
@@ -65,13 +65,13 @@ non-fungible 디지털 자산을 전송하는 데 사용됩니다. 여러개의 
 
 ```c++
 /*
-@param name     from: 디지털 자산을 보내는 유저
-@param name     to: 디지털 자산을 받는 유저
-@param string   symbol_name: 심볼 이름
+@param name             from: 디지털 자산을 보내는 유저
+@param name             to: 디지털 자산을 받는 유저
+@param symbol_code      symbol_name: 심볼 이름
 @param vector<uint64_t> token_ids: 디지털 자산 아이디
 @param string   memo: 메모
 */
-ACTION transfernft(name from, name to, string symbol_name, vector<uint64_t> token_ids, string memo);
+ACTION transfernft(name from, name to, symbol_code symbol_name, vector<uint64_t> token_ids, string memo);
 ```
 
 > 메모에는 해당 디지털 자산의 이동에 대한 히스토리를 남길 수 있습니다.
@@ -119,12 +119,12 @@ ACTION burn(name owner, asset quantity, uint64_t token_id, string reason)
 
 ```c++
 /*
-@param name     owner: 디지털 자산 소유자
-@param string   symbol_name: 디지털 자산 symbol
+@param name             owner: 디지털 자산 소유자
+@param symbol_code      symbol_name: 디지털 자산 symbol
 @param vector<uint64_t> token_ids: 디지털 자산 아이디들
-@param string   reason: 삭제 사유
+@param string           reason: 삭제 사유
 */
-ACTION burnnft(name owner, string symbol_name, vector<uint64_t> token_ids, string reason)
+ACTION burnnft(name owner, symbol_code symbol_name, vector<uint64_t> token_ids, string reason)
 ```
 
 > 소유자와 게임사가 실행 가능한 이유는 게임을 하는 도중에 소유자가 필요 없다고 생각이 되어 파괴를 할 수 있으며, 또한 게임사에서도 소유자의 아이템에 대해서 무언가의 엑션이 있을때 삭제 할 수 있어야 됩니다.(예. 아이템 강화 실패 등등)
@@ -137,11 +137,11 @@ ACTION burnnft(name owner, string symbol_name, vector<uint64_t> token_ids, strin
 
 ```c++
 /*
-@param string   symbol_name: 디지털 자산의 심볼
-@param string   category_name: 카테고리 이름
-@param string[] fields: 카테고리의 필수 필드
+@param symbol_code   symbol_name: 디지털 자산의 심볼
+@param string        category_name: 카테고리 이름
+@param string[]      fields: 카테고리의 필수 필드
 */
-ACTION addcategory(string symbol_name, string category_name, vector<string> fields)
+ACTION addcategory(symbol_code symbol_name, string category_name, vector<string> fields)
 ```
 
 > 게임 특성상 시간이 지날 수록 신규 아이템이 만들어져야됩니다. 그에 따라 카테고리를 추가 할 수 있어야됩니다.
@@ -154,12 +154,12 @@ ACTION addcategory(string symbol_name, string category_name, vector<string> fiel
 
 ```c++
 /*
-@param name     owner: 디지털 자산 소유자
-@param string   symbol_name: 심볼 이름
-@param uint64_t token_id: 디지털 자산 아이디
-@param string   token_name: 수정할 디지털 자산 이름
-@param string   options: 수정할 옵션 (Stringified Json)
-@param string   reason: 수정 사유
+@param name          owner: 디지털 자산 소유자
+@param symbol_code   symbol_name: 심볼 이름
+@param uint64_t      token_id: 디지털 자산 아이디
+@param string        token_name: 수정할 디지털 자산 이름
+@param string        options: 수정할 옵션 (Stringified Json)
+@param string        reason: 수정 사유
 
 option Example
 {
@@ -169,7 +169,7 @@ option Example
 }
 */
 
-ACTION modify(name owner, string symbol_name, uint64_t token_id, string token_name, string options, string reason)
+ACTION modify(name owner, symbol_code symbol_name, uint64_t token_id, string token_name, string options, string reason)
 ```
 
 > 게임을 하는 도중 디지털 자산에 대한 엑션이 있을 경우(예. 강화 성공, 강화 실패 등등) 디지털 자산의 수정이 필요합니다. 그래서 게임사의 권한으로 디지털 자산의 수정을 할 수 있습니다. 
