@@ -15,10 +15,10 @@ Symbol can be up to 7 digits in A-Z.
 
 ```c++
 /*
-@param name     issuer: Digital assets issuer
-@param string     symbol_name: Digital assets symbol name
-@param uint64_t app_id: App ID
-@param string   structs: Structure of digital assets (Stringified Json)
+@param name            issuer: Digital assets issuer
+@param symbol_code     symbol_name: Digital assets symbol name
+@param uint64_t        app_id: App ID
+@param string          structs: Structure of digital assets (Stringified Json)
 structs Example
 [
     {
@@ -27,7 +27,7 @@ structs Example
     }
 ]
 */
-ACTION create(name issuer, string symbol_name, uint64_t app_id, string structs)
+ACTION create(name issuer, symbol_code symbol_name, uint64_t app_id, string structs)
 ```
 
 > The category is needed to serve as the minimal measure to prevent mis-issued digital assets.
@@ -44,7 +44,7 @@ reason for issuance must be included for the history of digital assets.
 ```c++
 /*
 @param name     to: Digital assets owner
-@param quantity quantity: Number of digital assets to issue
+@param asset    quantity: Number of digital assets to issue
 @param string   token_name: Digital assets name
 @param string   category: Category for digital assets to be issued
 @param string   options: Option for digital assets to be issued (Stringified Json)
@@ -72,13 +72,13 @@ executed by the digital asset owner.
 
 ```c++
 /*
-@param name     from: User who sends digital assets
-@param name     to: User who receives digital assets
-@param string     symbol_name: Symbol name
+@param name             from: User who sends digital assets
+@param name             to: User who receives digital assets
+@param symbol_code      symbol_name: Symbol name
 @param vector<uint64_t> token_ids: Digital asset IDs
 @param string   memo: memo
 */
-ACTION transfernft(name from, name to, string symbol_name, vector<uint64_t> token_ids, string memo);
+ACTION transfernft(name from, name to, symbol_code symbol_name, vector<uint64_t> token_ids, string memo);
 ```
 
 > Transaction history of digital assets can be recorded on memo.
@@ -127,12 +127,12 @@ ACTION burn(name owner, asset quantity, uint64_t token_id, string reason)
 
 ```c++
 /*
-@param name     owner: Digital assets owner
-@param string     symbol_name: Digital assets symbol
+@param name             owner: Digital assets owner
+@param symbol_code      symbol_name: Digital assets symbol
 @param vector<uint64_t> token_ids: Digital assets IDs
-@param string   reason: Reason for deletion
+@param string           reason: Reason for deletion
 */
-ACTION burnnft(name owner, string symbol_name, vector<uint64_t> token_ids, string reason)
+ACTION burnnft(name owner, symbol_code symbol_name, vector<uint64_t> token_ids, string reason)
 ```
 
 >  The owner and the game company are able to execute because (1) the owner may feel that he/she no longer needs the item and thus burn, and (2) the game company must be able to delete when there is an action in accordance to the owner’s item (EX. Failure of item enhancement, etc.)
@@ -143,11 +143,11 @@ add categories of publishable digital assets.
 
 ```c++
 /*
-@param string     symbol_name: Digital assets symbol
-@param string   category_name: Category name
-@param string[] fields: field of category
+@param symbol_code     symbol_name: Digital assets symbol
+@param string          category_name: Category name
+@param string[]        fields: field of category
 */
-ACTION addcategory(string symbol_name, string category_name, vector<string> fields)
+ACTION addcategory(symbol_code symbol_name, string category_name, vector<string> fields)
 ```
 
 > Due to the nature of the game, new items need to be created over time. Thus, categories should be to addable accordingly.
@@ -160,12 +160,12 @@ ACTION addcategory(string symbol_name, string category_name, vector<string> fiel
 
 ```c++
 /*
-@param name     owner: Digital assets owner
-@param string     symbol_name: Symbol name
-@param uint64_t token_id: Digital assets id
-@param string   token_name: Name of digital assets to be modified
-@param string   options: Options to be modified (Stringified Json)
-@param string   reason: reason for modification
+@param name            owner: Digital assets owner
+@param symbol_code     symbol_name: Symbol name
+@param uint64_t        token_id: Digital assets id
+@param string          token_name: Name of digital assets to be modified
+@param string          options: Options to be modified (Stringified Json)
+@param string          reason: reason for modification
 
 option Example
 {
@@ -175,7 +175,7 @@ option Example
 }
 */
 
-ACTION modify(name owner, string symbol_name, uint64_t token_id, string token_name, string options, string reason)
+ACTION modify(name owner, symbol_code symbol_name, uint64_t token_id, string token_name, string options, string reason)
 ```
 
 >  If there is an action on the digital assets while playing the game (e.g. successful enhancement, enhancement failure, etc.), digital asset modification is needed. That is why gaming companies are given the authorization to modify the digital assets information.
