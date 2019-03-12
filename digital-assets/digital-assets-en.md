@@ -1,6 +1,6 @@
 # ITAM GAMES Digital Assets V 0.1.1
 
-## Introducation
+## Introduction
 
  This contract is structured so that a single gaming company could make digital assets on ‘N’ number of games or apps. Therefore, the symbol would be the unique key for a game or an app, and thus multiple digital assets can be created under one symbol. Also, although there are costs for RAM, all of the details of the digital assets are registered in both block and table. Registration, modification, and deletion of assets are recorded on block for the history of digital assets. (For every action, there is a ‘reason’ and/or ‘memo’)
 
